@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Scorpian Content</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+
+        <span class="logo-symbol">
+            🦂
+        </span>
+
+        SCORPIAN
+
+    </div>
+
+
+    <div class="dashboard-nav">
+
+        <a href="/dashboard">
+            Dashboard
+        </a>
+
+        <a href="/logout">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+<main class="dashboard">
+
+    <section class="content-section">
+
+        <div class="section-heading">
+
+            <span class="eyebrow">
+                EDIT YOUR SCORPIAN
+            </span>
+
+            <h2>
+                Edit Content
+            </h2>
+
+        </div>
+
+
+        <form
+            method="POST"
+            style="max-width:700px;margin:auto;">
+
+            <label>
+                Title
+            </label>
+
+            <input
+                type="text"
+                name="title"
+                value="{{ item['title'] }}"
+                required>
+
+
+            <label>
+                Description
+            </label>
+
+            <textarea
+                name="description"
+                required>{{ item['description'] }}</textarea>
+
+
+            <label>
+                Sub-section
+            </label>
+
+            <input
+                type="text"
+                name="subsection"
+                value="{{ item['subsection'] }}"
+                required>
+
+
+            <label>
+                Language
+            </label>
+
+            <select name="language">
+
+                <option
+                    value="English"
+                    {% if item['language'] == 'English' %}
+                    selected
+                    {% endif %}>
+                    English
+                </option>
+
+                <option
+                    value="Kannada"
+                    {% if item['language'] == 'Kannada' %}
+                    selected
+                    {% endif %}>
+                    Kannada
+                </option>
+
+                <option
+                    value="Hindi"
+                    {% if item['language'] == 'Hindi' %}
+                    selected
+                    {% endif %}>
+                    Hindi
+                </option>
+
+                <option
+                    value="Telugu"
+                    {% if item['language'] == 'Telugu' %}
+                    selected
+                    {% endif %}>
+                    Telugu
+                </option>
+
+                <option
+                    value="Other"
+                    {% if item['language'] == 'Other' %}
+                    selected
+                    {% endif %}>
+                    Other
+                </option>
+
+            </select>
+
+
+            <button
+                type="submit"
+                class="save-button">
+
+                Save Changes
+
+            </button>
+
+        </form>
+
+    </section>
+
+</main>
+
+</body>
+
+</html>

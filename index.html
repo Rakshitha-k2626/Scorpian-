@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+```
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Scorpian | Your Work. Your World.</title>
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}">
+
+<style>
+
+    /* =====================================================
+       ANIMATIONS
+    ===================================================== */
+
+    .hero-content,
+    .scorpion-symbol,
+    .about,
+    .category {
+        animation: fadeUp 0.8s ease both;
+    }
+
+    .hero-content {
+        animation-delay: 0.1s;
+    }
+
+    .scorpion-symbol {
+        animation-delay: 0.25s;
+    }
+
+    .about {
+        animation-delay: 0.4s;
+    }
+
+    .category:nth-child(1) {
+        animation-delay: 0.1s;
+    }
+
+    .category:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+
+    .category:nth-child(3) {
+        animation-delay: 0.3s;
+    }
+
+    .category:nth-child(4) {
+        animation-delay: 0.4s;
+    }
+
+    @keyframes fadeUp {
+
+        from {
+            opacity: 0;
+            transform: translateY(25px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+    }
+
+    .circle {
+        animation:
+            scorpionFloat 4s ease-in-out infinite;
+    }
+
+    .circle span {
+        display: inline-block;
+
+        animation:
+            scorpionPulse 2.5s ease-in-out infinite;
+    }
+
+    @keyframes scorpionFloat {
+
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-12px);
+        }
+
+    }
+
+    @keyframes scorpionPulse {
+
+        0%,
+        100% {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.12);
+        }
+
+    }
+
+    .category {
+
+        transition:
+            transform 0.3s ease,
+            box-shadow 0.3s ease;
+
+    }
+
+    .category:hover {
+        transform: translateY(-8px);
+    }
+
+
+    /* =====================================================
+       ABOUT ME
+    ===================================================== */
+
+    .about-me-section {
+
+        padding: 90px 20px;
+
+        text-align: center;
+
+    }
+
+    .about-me-container {
+
+        max-width: 950px;
+
+        margin: 40px auto 0;
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(3, 1fr);
+
+        gap: 20px;
+
+    }
+
+    .about-me-card {
+
+        padding: 30px;
+
+        border-radius: 22px;
+
+        background:
+            rgba(255,255,255,0.035);
+
+        border:
+            1px solid
+            rgba(255,255,255,0.10);
+
+        transition:
+            0.35s ease;
+
+        text-align: left;
+
+    }
+
+    .about-me-card:hover {
+
+        transform:
+            translateY(-8px);
+
+        box-shadow:
+            0 20px 50px
+            rgba(0,0,0,0.18);
+
+    }
+
+    .about-me-card h3 {
+
+        margin-bottom: 15px;
+
+        font-size: 20px;
+
+    }
+
+    .about-me-card p {
+
+        line-height: 1.8;
+
+        opacity: 0.72;
+
+        font-size: 14px;
+
+    }
+
+
+    /* =====================================================
+       IDENTITY RESULT
+    ===================================================== */
+
+    .scorpian-result {
+
+        max-width: 650px;
+
+        margin: 45px auto 0;
+
+        padding: 45px 30px;
+
+        border-radius: 25px;
+
+        border:
+            1px solid
+            rgba(255,255,255,0.12);
+
+        background:
+            rgba(255,255,255,0.035);
+
+        box-shadow:
+            0 25px 70px
+            rgba(0,0,0,0.25);
+
+        animation:
+            identityAppear 0.7s ease both;
+
+    }
+
+    @keyframes identityAppear {
+
+        from {
+
+            opacity: 0;
+
+            transform:
+                translateY(30px)
+                scale(0.96);
+
+        }
+
+        to {
+
+            opacity: 1;
+
+            transform:
+                translateY(0)
+                scale(1);
+
+        }
+
+    }
+
+    .animal-emoji {
+
+        font-size: 90px;
+
+        margin-bottom: 15px;
+
+        animation:
+            badgePop 0.7s
+            cubic-bezier(
+                0.175,
+                0.885,
+                0.32,
+                1.275
+            );
+
+    }
+
+    @keyframes badgePop {
+
+        0% {
+
+            opacity: 0;
+
+            transform:
+                scale(0)
+                rotate(-20deg);
+
+        }
+
+        70% {
+
+            transform:
+                scale(1.15)
+                rotate(5deg);
+
+        }
+
+        100% {
+
+            opacity: 1;
+
+            transform:
+                scale(1)
+                rotate(0);
+
+        }
+
+    }
+
+    #animalTitle {
+
+        margin-bottom: 12px;
+
+    }
+
+    #animalDescription {
+
+        max-width: 500px;
+
+        margin:
+            0 auto 25px;
+
+        line-height: 1.7;
+
+        opacity: 0.7;
+
+    }
+
+    .badge-info {
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 12px;
+
+        margin: 25px auto;
+
+        max-width: 500px;
+
+    }
+
+    .badge-info p {
+
+        padding: 12px;
+
+        border-radius: 12px;
+
+        background:
+            rgba(255,255,255,0.05);
+
+        font-size: 13px;
+
+    }
+
+    .scorpian-actions {
+
+        display: flex;
+
+        justify-content: center;
+
+        gap: 12px;
+
+        flex-wrap: wrap;
+
+        margin-top: 25px;
+
+    }
+
+    .badge-button {
+
+        display: inline-block;
+
+        padding:
+            13px 20px;
+
+        border-radius: 12px;
+
+        text-decoration: none;
+
+        color: inherit;
+
+        border:
+            1px solid
+            rgba(255,255,255,0.15);
+
+        transition:
+            0.3s ease;
+
+    }
+
+    .badge-button:hover {
+
+        transform:
+            translateY(-4px);
+
+        background:
+            rgba(255,255,255,0.07);
+
+    }
+
+    .badge-button.secondary {
+
+        opacity: 0.8;
+
+    }
+
+
+    /* =====================================================
+       OFFICIAL LINKS
+    ===================================================== */
+
+    .official-section {
+
+        padding:
+            80px 20px;
+
+        text-align: center;
+
+    }
+
+    .official-links {
+
+        display: flex;
+
+        justify-content: center;
+
+        gap: 15px;
+
+        flex-wrap: wrap;
+
+        margin-top: 30px;
+
+    }
+
+    .official-link {
+
+        min-width: 220px;
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 14px;
+
+        padding:
+            16px 20px;
+
+        border-radius: 15px;
+
+        text-decoration: none;
+
+        color: inherit;
+
+        border:
+            1px solid
+            rgba(255,255,255,0.1);
+
+        background:
+            rgba(255,255,255,0.025);
+
+        transition:
+            0.3s ease;
+
+    }
+
+    .official-link:hover {
+
+        transform:
+            translateY(-5px);
+
+        border-color:
+            rgba(255,255,255,0.3);
+
+    }
+
+    .official-icon {
+
+        width: 40px;
+
+        height: 40px;
+
+        border-radius: 10px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        background:
+            rgba(255,255,255,0.08);
+
+        font-weight: bold;
+
+    }
+
+    .official-text {
+
+        display: flex;
+
+        flex-direction: column;
+
+        text-align: left;
+
+    }
+
+    .official-text small {
+
+        opacity: 0.55;
+
+        margin-top: 3px;
+
+    }
+
+    .official-arrow {
+
+        margin-left: auto;
+
+        font-size: 18px;
+
+    }
+
+
+    /* =====================================================
+       RESPONSIVE
+    ===================================================== */
+
+    @media (max-width: 800px) {
+
+        .about-me-container {
+
+            grid-template-columns: 1fr;
+
+        }
+
+        .badge-info {
+
+            grid-template-columns: 1fr;
+
+        }
+
+    }
+
+</style>
+```
+
+</head>
+
+<body>
+
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
+
+<nav class="navbar">
+
+```
+<div class="logo">
+
+    <span class="logo-symbol">
+        🦂
+    </span>
+
+    SCORPIAN
+
+</div>
+
+
+<div class="nav-links">
+
+    <a href="/">
+        Home
+    </a>
+
+    <a href="#about">
+        About
+    </a>
+
+    <a href="#about-me">
+        Me
+    </a>
+
+    <a href="#explore">
+        Explore
+    </a>
+
+    {% if session.get("user_id") %}
+
+    <a href="/dashboard">
+        Dashboard
+    </a>
+
+    <a href="/scorpian-profile/{{ session.get('username') }}">
+        My Scorpian
+    </a>
+
+    <a href="/logout">
+        Logout
+    </a>
+
+    {% else %}
+
+    <a href="/login">
+        Login
+    </a>
+
+    {% endif %}
+
+</div>
+```
+
+</nav>
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<main class="hero">
+
+```
+<div class="hero-content">
+
+    <p class="small-title">
+        YOUR WORK. YOUR WORLD.
+    </p>
+
+
+    {% if session.get("user_id") %}
+
+    <h1>
+
+        Welcome Back,<br>
+
+        {{ session.get("username") }}
+
+    </h1>
+
+    {% else %}
+
+    <h1>
+
+        Everything You Create,<br>
+
+        In One Place.
+
+    </h1>
+
+    {% endif %}
+
+
+    <p class="description">
+
+        Scorpian is a personal space to collect,
+        organize and showcase your technical,
+        creative and non-technical work.
+
+    </p>
+
+
+    <div class="buttons">
+
+        {% if session.get("user_id") %}
+
+        <a href="/dashboard"
+           class="primary-btn">
+
+            Open My Dashboard
+
+        </a>
+
+
+        <a
+            href="/scorpian-profile/{{ session.get('username') }}"
+            class="secondary-btn">
+
+            🦂 My Scorpian
+
+        </a>
+
+        {% else %}
+
+        <a href="/register"
+           class="primary-btn">
+
+            Create Your Scorpian
+
+        </a>
+
+
+        <a href="#about"
+           class="secondary-btn">
+
+            Discover Scorpian
+
+        </a>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+
+
+<div class="scorpion-symbol">
+
+    <div class="circle">
+
+        <span>
+            🦂
+        </span>
+
+    </div>
+
+</div>
+```
+
+</main>
+
+<!-- =====================================================
+     ABOUT SCORPIAN
+===================================================== -->
+
+<section id="about"
+         class="about">
+
+```
+<p class="small-title">
+    ABOUT SCORPIAN
+</p>
+
+
+<h2>
+    One Place. Everything You Create.
+</h2>
+
+
+<p class="about-description">
+
+    Projects, AI experiments, articles, stories,
+    photographs, videos, research, designs,
+    achievements and ideas —
+
+    Scorpian brings them together
+    in one personal space.
+
+</p>
+
+
+<div id="explore"
+     class="categories">
+
+
+    <div class="category">
+
+        <div class="category-icon">
+            💻
+        </div>
+
+        <h3>
+            Technical
+        </h3>
+
+        <p>
+            Projects, AI, GenAI,
+            coding and experiments.
+        </p>
+
+    </div>
+
+
+    <div class="category">
+
+        <div class="category-icon">
+            ✍️
+        </div>
+
+        <h3>
+            Writing
+        </h3>
+
+        <p>
+            Articles, stories,
+            thoughts and ideas.
+        </p>
+
+    </div>
+
+
+    <div class="category">
+
+        <div class="category-icon">
+            🎨
+        </div>
+
+        <h3>
+            Creative
+        </h3>
+
+        <p>
+            Designs, photographs,
+            videos and creative work.
+        </p>
+
+    </div>
+
+
+    <div class="category">
+
+        <div class="category-icon">
+            🔬
+        </div>
+
+        <h3>
+            Research
+        </h3>
+
+        <p>
+            Experiments, discoveries
+            and learning.
+        </p>
+
+    </div>
+
+
+</div>
+```
+
+</section>
+
+<!-- =====================================================
+     ABOUT ME
+===================================================== -->
+
+<section id="about-me"
+         class="about-me-section">
+
+```
+<p class="small-title">
+    BEHIND THE SCORPIAN
+</p>
+
+
+<h2>
+    About Me
+</h2>
+
+
+<p class="about-description">
+
+    A little about the person,
+    curiosity and journey behind Scorpian.
+
+</p>
+
+
+<div class="about-me-container">
+
+
+    <!-- PARAGRAPH 1 -->
+
+    <div class="about-me-card">
+
+        <h3>
+            👩‍💻 Who I Am
+        </h3>
+
+        <p>
+
+            I am Rakshitha K., a Computer Science
+            and Design student who enjoys exploring
+            the space where technology, creativity
+            and human experiences meet. I am curious
+            about Artificial Intelligence, design and
+            the many ways technology can be transformed
+            into something meaningful and useful.
+
+        </p>
+
+    </div>
+
+
+    <!-- PARAGRAPH 2 -->
+
+    <div class="about-me-card">
+
+        <h3>
+            🔬 What I Explore
+        </h3>
+
+        <p>
+
+            I enjoy experimenting with AI, intelligent
+            applications, user experiences, research
+            ideas and creative projects. Rather than
+            learning only from theory, I like turning
+            ideas into experiments and projects while
+            understanding how technology can solve
+            real problems and communicate ideas in a
+            simple and human-friendly way.
+
+        </p>
+
+    </div>
+
+
+    <!-- PARAGRAPH 3 -->
+
+    <div class="about-me-card">
+
+        <h3>
+            🌱 My Journey
+        </h3>
+
+        <p>
+
+            I believe every project, experiment,
+            achievement and new skill becomes part of
+            a larger journey. My goal is to keep
+            learning, researching and creating while
+            building my own identity in technology.
+            Scorpian is a reflection of that journey —
+            a place where the things I create and the
+            experiences that shape me can live together.
+
+        </p>
+
+    </div>
+
+
+</div>
+```
+
+</section>
+
+<!-- =====================================================
+     RUN SCORPIAN
+===================================================== -->
+
+<section class="official-section">
+
+```
+<p class="small-title">
+    DISCOVER YOUR IDENTITY
+</p>
+
+
+<h2>
+    Let Your Scorpian Come Alive.
+</h2>
+
+
+<p>
+
+    Run Scorpian and discover a unique
+    animal identity badge.
+
+</p>
+
+
+<button
+    id="runScorpianBtn"
+    class="run-scorpian-btn">
+
+    🦂 Run Scorpian
+
+</button>
+
+
+
+<!-- RESULT -->
+
+<div
+    id="scorpianResult"
+    class="scorpian-result"
+    style="display:none;">
+
+
+    <div
+        id="animalEmoji"
+        class="animal-emoji">
+
+    </div>
+
+
+    <h2 id="animalTitle">
+    </h2>
+
+
+    <p id="animalDescription">
+    </p>
+
+
+    <div class="badge-info">
+
+
+        <p>
+
+            <strong>
+                Badge:
+            </strong>
+
+            #
+
+            <span id="badgeNumber">
+            </span>
+
+        </p>
+
+
+        <p>
+
+            <strong>
+                Rank:
+            </strong>
+
+            <span id="rankName">
+            </span>
+
+        </p>
+
+
+        <p>
+
+            <strong>
+                Achievement Coins:
+            </strong>
+
+            <span id="achievementCoins">
+            </span>
+
+        </p>
+
+
+        <p>
+
+            <strong>
+                Entries:
+            </strong>
+
+            <span id="totalEntries">
+            </span>
+
+        </p>
+
+
+    </div>
+
+
+    <div class="scorpian-actions">
+
+
+        <a
+            id="downloadBadge"
+            class="badge-button"
+            href="#">
+
+            📥 Download Badge
+
+        </a>
+
+
+        <a
+            id="officialProfile"
+            class="badge-button secondary"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer">
+
+            🌐 My Scorpian Profile
+
+        </a>
+
+
+    </div>
+
+
+</div>
+```
+
+</section>
+
+<!-- =====================================================
+     MY PORTFOLIO / OFFICIAL LINKS
+===================================================== -->
+
+<section class="official-section">
+
+```
+<p class="small-title">
+    MY DIGITAL PRESENCE
+</p>
+
+
+<h2>
+    Explore My Journey.
+</h2>
+
+
+<p>
+
+    Connect with me and explore the work
+    I create beyond Scorpian.
+
+</p>
+
+
+<div class="official-links">
+
+
+    <!-- PORTFOLIO -->
+
+    <a
+        href="YOUR_OFFICIAL_PORTFOLIO_LINK_HERE"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="official-link">
+
+
+        <span class="official-icon">
+            🌐
+        </span>
+
+
+        <span class="official-text">
+
+            <strong>
+                My Portfolio
+            </strong>
+
+            <small>
+                Official Portfolio
+            </small>
+
+        </span>
+
+
+        <span class="official-arrow">
+            →
+        </span>
+
+
+    </a>
+
+
+
+    <!-- GITHUB -->
+
+    <a
+        href="https://github.com/Rakshitha-k2626"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="official-link">
+
+
+        <span class="official-icon">
+            ◉
+        </span>
+
+
+        <span class="official-text">
+
+            <strong>
+                GitHub
+            </strong>
+
+            <small>
+                Projects & Code
+            </small>
+
+        </span>
+
+
+        <span class="official-arrow">
+            →
+        </span>
+
+
+    </a>
+
+
+
+    <!-- LINKEDIN -->
+
+    <a
+        href="https://www.linkedin.com/in/rakshitha-k-63718332b/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="official-link">
+
+
+        <span class="official-icon">
+            in
+        </span>
+
+
+        <span class="official-text">
+
+            <strong>
+                LinkedIn
+            </strong>
+
+            <small>
+                Professional Journey
+            </small>
+
+        </span>
+
+
+        <span class="official-arrow">
+            →
+        </span>
+
+
+    </a>
+
+
+</div>
+```
+
+</section>
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+```
+<p>
+    🦂 Scorpian
+</p>
+
+<p>
+    Your work. Your world.
+</p>
+
+<p>
+    © 2026 Scorpian
+</p>
+```
+
+</footer>
+
+<!-- =====================================================
+     ONLY SCORPIAN JAVASCRIPT
+===================================================== -->
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+
+        const runButton =
+            document.getElementById(
+                "runScorpianBtn"
+            );
+
+
+        const result =
+            document.getElementById(
+                "scorpianResult"
+            );
+
+
+        if (!runButton) {
+            return;
+        }
+
+
+        runButton.addEventListener(
+            "click",
+            async function () {
+
+
+                runButton.disabled = true;
+
+                runButton.innerHTML =
+                    "🦂 Discovering...";
+
+
+                try {
+
+
+                    const response =
+                        await fetch(
+                            "/run-scorpian",
+                            {
+                                method: "GET",
+                                credentials: "same-origin"
+                            }
+                        );
+
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                            "Please login first."
+                        );
+
+                    }
+
+
+                    const data =
+                        await response.json();
+
+
+                    if (!data.success) {
+
+                        throw new Error(
+                            data.message ||
+                            "Scorpian could not run."
+                        );
+
+                    }
+
+
+                    /* =========================
+                       ANIMAL
+                    ========================= */
+
+                    document.getElementById(
+                        "animalEmoji"
+                    ).textContent =
+                        data.animal;
+
+
+                    document.getElementById(
+                        "animalTitle"
+                    ).textContent =
+                        data.title;
+
+
+                    document.getElementById(
+                        "animalDescription"
+                    ).textContent =
+                        data.description;
+
+
+                    /* =========================
+                       BADGE
+                    ========================= */
+
+                    document.getElementById(
+                        "badgeNumber"
+                    ).textContent =
+                        data.badge_number;
+
+
+                    /* =========================
+                       STATISTICS
+                    ========================= */
+
+                    document.getElementById(
+                        "rankName"
+                    ).textContent =
+                        data.rank_name;
+
+
+                    document.getElementById(
+                        "achievementCoins"
+                    ).textContent =
+                        data.achievement_coins;
+
+
+                    document.getElementById(
+                        "totalEntries"
+                    ).textContent =
+                        data.total_entries;
+
+
+                    /* =========================
+                       DOWNLOAD
+                    ========================= */
+
+                    document.getElementById(
+                        "downloadBadge"
+                    ).href =
+                        data.download_link;
+
+
+                    /* =========================
+                       PROFILE
+                    ========================= */
+
+                    document.getElementById(
+                        "officialProfile"
+                    ).href =
+                        data.official_link;
+
+
+                    /* =========================
+                       SHOW RESULT
+                    ========================= */
+
+                    result.style.display =
+                        "block";
+
+
+                    result.scrollIntoView({
+                        behavior: "smooth",
+                        block: "center"
+                    });
+
+
+                    runButton.innerHTML =
+                        "🦂 Run Again";
+
+
+                }
+
+                catch (error) {
+
+
+                    console.error(
+                        "SCORPIAN ERROR:",
+                        error
+                    );
+
+
+                    alert(
+                        error.message
+                    );
+
+
+                    runButton.innerHTML =
+                        "🦂 Run Scorpian";
+
+
+                }
+
+
+                finally {
+
+                    runButton.disabled =
+                        false;
+
+                }
+
+            }
+
+        );
+
+    }
+
+);
+
+</script>
+
+</body>
+
+</html>

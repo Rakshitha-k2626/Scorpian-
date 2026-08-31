@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>{{ username }} — My Scorpian</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body>
+
+<div class="background-glow glow-one"></div>
+<div class="background-glow glow-two"></div>
+
+
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
+
+<nav class="navbar">
+
+    <div class="logo">
+
+        <span class="logo-symbol">
+            🦂
+        </span>
+
+        <span>
+            SCORPIAN
+        </span>
+
+    </div>
+
+
+    <div class="dashboard-nav">
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/dashboard">
+            Dashboard
+        </a>
+
+        <a href="/logout">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =====================================================
+     MAIN SCORPIAN
+===================================================== -->
+
+<main class="scorpian-page">
+
+
+    <!-- =================================================
+         HERO
+    ================================================== -->
+
+    <section class="scorpian-hero">
+
+
+        <div class="scorpian-symbol">
+
+            🦂
+
+        </div>
+
+
+        <span class="eyebrow">
+
+            PERSONAL ARCHIVE
+
+        </span>
+
+
+        <h1>
+
+            {{ username }}'s
+
+            <span>
+                Scorpian.
+            </span>
+
+        </h1>
+
+
+        <p>
+
+            Your work. Your ideas.
+            Your experiences.
+            Your world.
+
+        </p>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         OVERVIEW
+    ================================================== -->
+
+    <section class="scorpian-overview">
+
+
+        <div class="overview-card">
+
+            <span class="overview-number">
+                {{ content|length }}
+            </span>
+
+            <span class="overview-label">
+                Creations
+            </span>
+
+        </div>
+
+
+        <div class="overview-card">
+
+            <span class="overview-number">
+                {{ categories|length }}
+            </span>
+
+            <span class="overview-label">
+                Categories
+            </span>
+
+        </div>
+
+
+        <div class="overview-card">
+
+            <span class="overview-number">
+                {{ projects_count }}
+            </span>
+
+            <span class="overview-label">
+                Projects
+            </span>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         CATEGORY FILTER
+    ================================================== -->
+
+    <section class="scorpian-filter">
+
+
+        <span class="eyebrow">
+            EXPLORE
+        </span>
+
+
+        <h2>
+            Explore your world.
+        </h2>
+
+
+        <div class="filter-buttons">
+
+
+            <button
+                type="button"
+                class="filter-button active"
+                onclick="filterScorpian('all')">
+
+                All
+
+            </button>
+
+
+            {% for category in categories %}
+
+                <button
+                    type="button"
+                    class="filter-button"
+                    onclick="filterScorpian('{{ category }}')">
+
+                    {{ category }}
+
+                </button>
+
+            {% endfor %}
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         COLLECTION
+    ================================================== -->
+
+    <section class="scorpian-collection">
+
+
+        {% if content %}
+
+
+            <div class="scorpian-grid">
+
+
+                {% for item in content %}
+
+
+                    <article
+                        class="scorpian-item"
+                        data-category="{{ item['category'] }}">
+
+
+                        <!-- TOP -->
+
+                        <div class="scorpian-item-top">
+
+
+                            <span class="item-category">
+
+                                {{ item["category"] }}
+
+                            </span>
+
+
+                            <span class="item-date">
+
+                                {{ item["created_at"][:10] }}
+
+                            </span>
+
+
+                        </div>
+
+
+
+                        <!-- TITLE -->
+
+                       <h3>
+
+    <a
+        href="{{ url_for(
+            'view_scorpian_item',
+            content_id=item['id']
+        ) }}"
+        class="scorpian-item-title">
+
+        {{ item["title"] }}
+
+    </a>
+
+</h3>
+
+
+
+                        <!-- SUBSECTION -->
+
+                        <span class="item-subsection">
+
+                            {{ item["subsection"] }}
+
+                        </span>
+
+
+
+                        <!-- DESCRIPTION -->
+
+                        {% if item["description"] %}
+
+                            <p>
+
+                                {{ item["description"] }}
+
+                            </p>
+
+                        {% endif %}
+
+
+
+                        <!-- LANGUAGE -->
+
+                        {% if item["language"] %}
+
+                            <span class="item-language">
+
+                                {{ item["language"] }}
+
+                            </span>
+
+                        {% endif %}
+
+
+
+                        <!-- MEDIA -->
+
+                        {% if item["media_filename"] %}
+
+                            <div class="item-media">
+
+
+                                <a
+                                    href="{{ url_for(
+                                        'static',
+                                        filename='uploads/' +
+                                        item['media_filename']
+                                    ) }}"
+                                    target="_blank">
+
+                                    View Attached Media →
+
+                                </a>
+
+
+                            </div>
+
+                        {% endif %}
+
+
+                    </article>
+
+
+                {% endfor %}
+
+
+            </div>
+
+
+        {% else %}
+
+
+            <!-- EMPTY STATE -->
+
+            <div class="scorpian-empty">
+
+
+                <div class="empty-icon">
+                    🦂
+                </div>
+
+
+                <h2>
+
+                    Your Scorpian
+                    is still empty.
+
+                </h2>
+
+
+                <p>
+
+                    Start adding projects,
+                    ideas, experiences and
+                    discoveries.
+
+                </p>
+
+
+                <a
+                    href="/dashboard"
+                    class="empty-button">
+
+                    Start Building
+
+                </a>
+
+
+            </div>
+
+
+        {% endif %}
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         FOOTER
+    ================================================== -->
+
+    <section class="scorpian-footer">
+
+
+        <span class="eyebrow">
+
+            SCORPIAN
+
+        </span>
+
+
+        <h2>
+
+            Your work deserves
+            a place of its own.
+
+        </h2>
+
+
+        <p>
+
+            Keep collecting.
+            Keep creating.
+            Keep discovering.
+
+        </p>
+
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+function filterScorpian(category) {
+
+    const items =
+        document.querySelectorAll(
+            ".scorpian-item"
+        );
+
+
+    const buttons =
+        document.querySelectorAll(
+            ".filter-button"
+        );
+
+
+    /* -----------------------------------------------
+       BUTTON STATE
+    ----------------------------------------------- */
+
+    buttons.forEach(
+        function(button) {
+
+            button.classList.remove(
+                "active"
+            );
+
+        }
+    );
+
+
+    event.target.classList.add(
+        "active"
+    );
+
+
+    /* -----------------------------------------------
+       FILTER ITEMS
+    ----------------------------------------------- */
+
+    items.forEach(
+        function(item) {
+
+            const itemCategory =
+                item.dataset.category;
+
+
+            if (
+                category === "all"
+                ||
+                itemCategory === category
+            ) {
+
+                item.style.display =
+                    "";
+
+            }
+
+            else {
+
+                item.style.display =
+                    "none";
+
+            }
+
+        }
+    );
+
+}
+
+</script>
+
+
+</body>
+
+</html>

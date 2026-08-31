@@ -1,0 +1,1822 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>My Scorpian</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body>
+
+<div class="background-glow glow-one"></div>
+<div class="background-glow glow-two"></div>
+
+
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
+
+<nav class="navbar">
+
+    <div class="logo">
+
+        <span class="logo-symbol">
+            🦂
+        </span>
+
+        <span>
+            SCORPIAN
+        </span>
+
+    </div>
+
+
+    <div class="dashboard-nav">
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/public">
+            My Scorpian
+        </a>
+
+        <a href="/logout">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- =====================================================
+     DASHBOARD
+===================================================== -->
+
+<main class="dashboard">
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="dashboard-hero">
+
+    <div class="welcome">
+
+        <span class="eyebrow">
+            YOUR PERSONAL ARCHIVE
+        </span>
+
+
+        <h1>
+
+            Welcome to your
+
+            <span>
+                Scorpian.
+            </span>
+
+        </h1>
+
+
+        <p>
+
+            A place where your work, thoughts,
+            discoveries, experiences and ideas
+            can exist together.
+
+        </p>
+
+    </div>
+
+
+    <div class="hero-orbit">
+
+        <div class="orbit-ring ring-one"></div>
+
+        <div class="orbit-ring ring-two"></div>
+
+        <div class="orbit-ring ring-three"></div>
+
+
+        <div class="orbit-core">
+
+            <span>
+                🦂
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     PROFILE
+===================================================== -->
+
+<section class="profile-card">
+
+    <div class="profile-info">
+
+
+        <div class="profile-circle">
+
+            {{ username[0]|upper }}
+
+        </div>
+
+
+        <div>
+
+            <span class="profile-label">
+                SCORPIAN OWNER
+            </span>
+
+
+            <h2>
+                {{ username }}
+            </h2>
+
+
+            <p>
+
+                Your personal collection of everything
+                you choose to create and remember.
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="profile-status">
+
+        <span class="status-dot"></span>
+
+        Building your Scorpian
+
+    </div>
+
+</section>
+<!-- =====================================================
+     SCORPIAN INSIGHTS
+===================================================== -->
+
+<section class="insights-section">
+
+    <div class="section-heading">
+
+        <span class="eyebrow">
+            SCORPIAN INSIGHTS
+        </span>
+
+        <h2>
+            Your collection at a glance.
+        </h2>
+
+        <p>
+            A small view of how your Scorpian is growing.
+        </p>
+
+    </div>
+
+
+    <div class="insights-grid">
+
+
+        <div class="insight-card">
+
+            <span class="insight-icon">
+                ✦
+            </span>
+
+            <strong>
+                {{ total_entries }}
+            </strong>
+
+            <span>
+                Total Entries
+            </span>
+
+        </div>
+
+
+        <div class="insight-card">
+
+            <span class="insight-icon">
+                📎
+            </span>
+
+            <strong>
+                {{ media_count }}
+            </strong>
+
+            <span>
+                Media Files
+            </span>
+
+        </div>
+
+
+        <div class="insight-card">
+
+            <span class="insight-icon">
+                ◈
+            </span>
+
+            <strong>
+                {{ category_count }}
+            </strong>
+
+            <span>
+                Categories Used
+            </span>
+
+        </div>
+
+
+        <div class="insight-card">
+
+            <span class="insight-icon">
+                A
+            </span>
+
+            <strong>
+                {{ language_count }}
+            </strong>
+
+            <span>
+                Languages
+            </span>
+
+        </div>
+
+
+    </div>
+
+
+    {% if most_used_category %}
+
+        <div class="most-used-card">
+
+            <div>
+
+                <span class="eyebrow">
+                    MOST ACTIVE SPACE
+                </span>
+
+                <h3>
+                    {{ most_used_category["category"] }}
+                </h3>
+
+            </div>
+
+
+            <div class="most-used-count">
+
+                {{ most_used_category["total"] }}
+
+                <span>
+                    entries
+                </span>
+
+            </div>
+
+        </div>
+
+    {% endif %}
+
+</section>
+
+<!-- =====================================================
+     CATEGORIES
+===================================================== -->
+
+<section class="content-section">
+<!-- =====================================================
+     COLLECTION SEARCH
+===================================================== -->
+
+<div class="collection-search">
+
+    <span class="search-icon">
+        🔎
+    </span>
+
+    <input
+        type="text"
+        id="collectionSearch"
+        placeholder="Search your Scorpian..."
+        autocomplete="off">
+
+</div>
+<!-- =====================================================
+     COLLECTION FILTERS
+===================================================== -->
+
+<div class="collection-filters">
+
+    <select id="categoryFilter">
+
+        <option value="all">
+            All Categories
+        </option>
+
+        <option value="technical">
+            Technical
+        </option>
+
+        <option value="nontechnical">
+            Non-Technical
+        </option>
+
+        <option value="creative">
+            Creative
+        </option>
+
+        <option value="research">
+            Research
+        </option>
+
+        <option value="knowledge">
+            Knowledge
+        </option>
+
+        <option value="journey">
+            Journey
+        </option>
+
+        <option value="media">
+            Media
+        </option>
+
+        <option value="ideas">
+            Ideas & Experiments
+        </option>
+
+    </select>
+
+
+    <select id="subsectionFilter">
+
+        <option value="all">
+            All Subsections
+        </option>
+
+    </select>
+
+
+    <select id="sortCollection">
+
+        <option value="newest">
+            Newest First
+        </option>
+
+        <option value="oldest">
+            Oldest First
+        </option>
+
+        <option value="title">
+            Title A–Z
+        </option>
+
+    </select>
+
+</div>
+
+        <!-- =================================================
+             TECHNICAL
+        ================================================== -->
+
+        <article class="content-card technical-card">
+
+            <div class="card-top">
+
+                <div class="card-icon">
+                    💻
+                </div>
+
+                <span class="card-number">
+                    01
+                </span>
+
+            </div>
+
+
+            <h3>
+                Technical
+            </h3>
+
+
+            <p>
+
+                Projects, AI, GenAI, coding,
+                experiments and technical work.
+
+            </p>
+
+
+           <div class="sub-items">
+
+    <span onclick="openSubsection('technical', 'Projects')">
+        Projects
+    </span>
+
+    <span onclick="openSubsection('technical', 'AI / GenAI')">
+        AI / GenAI
+    </span>
+
+    <span onclick="openSubsection('technical', 'Coding')">
+        Coding
+    </span>
+
+    <span onclick="openSubsection('technical', 'Research')">
+        Research
+    </span>
+
+    <span onclick="openSubsection('technical', 'Experiments')">
+        Experiments
+    </span>
+
+    <span onclick="openSubsection('technical', 'Technical Articles')">
+        Technical Articles
+    </span>
+
+    <span onclick="openSubsection('technical', 'Technical Talks')">
+        Technical Talks
+    </span>
+
+</div>
+
+
+
+            <button
+                type="button"
+                onclick="openCategory('technical')">
+
+                Open Technical
+
+                <span>
+                    →
+                </span>
+
+            </button>
+
+        </article>
+
+
+        <!-- =================================================
+             NON TECHNICAL
+        ================================================== -->
+
+        <article class="content-card nontechnical-card">
+
+            <div class="card-top">
+
+                <div class="card-icon">
+                    🌱
+                </div>
+
+                <span class="card-number">
+                    02
+                </span>
+
+            </div>
+
+
+            <h3>
+                Non-Technical
+            </h3>
+
+
+            <p>
+
+                Stories, articles, reflections,
+                observations and experiences.
+
+            </p>
+
+
+           <div class="sub-items">
+
+    <span onclick="openSubsection('nontechnical', 'Stories')">
+        Stories
+    </span>
+
+    <span onclick="openSubsection('nontechnical', 'Articles')">
+        Articles
+    </span>
+
+    <span onclick="openSubsection('nontechnical', 'Reflections')">
+        Reflections
+    </span>
+
+    <span onclick="openSubsection('nontechnical', 'Observations')">
+        Observations
+    </span>
+
+    <span onclick="openSubsection('nontechnical', 'Experiences')">
+        Experiences
+    </span>
+
+    <span onclick="openSubsection('nontechnical', 'Talks')">
+        Talks
+    </span>
+
+</div>
+
+
+            <button
+                type="button"
+                onclick="openCategory('nontechnical')">
+
+                Open Non-Technical
+
+                <span>
+                    →
+                </span>
+
+            </button>
+
+        </article>
+
+
+        <!-- =================================================
+             CREATIVE
+        ================================================== -->
+
+        <article class="content-card creative-card">
+
+            <div class="card-top">
+
+                <div class="card-icon">
+                    🎨
+                </div>
+
+                <span class="card-number">
+                    03
+                </span>
+
+            </div>
+
+
+            <h3>
+                Creative
+            </h3>
+
+
+            <p>
+
+                A home for visual thinking,
+                designs and creative expression.
+
+            </p>
+
+
+          <div class="sub-items">
+
+    <span onclick="openSubsection('creative', 'Designs')">
+        Designs
+    </span>
+
+    <span onclick="openSubsection('creative', 'Photography')">
+        Photography
+    </span>
+
+    <span onclick="openSubsection('creative', 'Videos')">
+        Videos
+    </span>
+
+    <span onclick="openSubsection('creative', 'Presentations')">
+        Presentations
+    </span>
+
+    <span onclick="openSubsection('creative', 'Creative Work')">
+        Creative Work
+    </span>
+
+</div>
+
+            <button
+                type="button"
+                onclick="openCategory('creative')">
+
+                Open Creative
+
+                <span>
+                    →
+                </span>
+
+            </button>
+
+        </article>
+
+
+        <!-- =================================================
+             RESEARCH
+        ================================================== -->
+
+        <article class="content-card research-card">
+
+            <div class="card-top">
+
+                <div class="card-icon">
+                    🔬
+                </div>
+
+                <span class="card-number">
+                    04
+                </span>
+
+            </div>
+
+
+            <h3>
+                Research
+            </h3>
+
+
+            <p>
+
+                Questions, papers, experiments,
+                literature and discoveries.
+
+            </p>
+
+<div class="sub-items">
+
+    <span onclick="openSubsection('research', 'Research Ideas')">
+        Research Ideas
+    </span>
+
+    <span onclick="openSubsection('research', 'Papers')">
+        Papers
+    </span>
+
+    <span onclick="openSubsection('research', 'Literature Review')">
+        Literature Review
+    </span>
+
+    <span onclick="openSubsection('research', 'Experiments')">
+        Experiments
+    </span>
+
+    <span onclick="openSubsection('research', 'Discoveries')">
+        Discoveries
+    </span>
+
+</div>
+
+
+            <button
+                type="button"
+                onclick="openCategory('research')">
+
+                Open Research
+
+                <span>
+                    →
+                </span>
+
+            </button>
+
+        </article>
+
+
+        <!-- =================================================
+             KNOWLEDGE
+        ================================================== -->
+
+        <article class="content-card knowledge-card">
+
+            <div class="card-top">
+
+                <div class="card-icon">
+                    🧠
+                </div>
+
+                <span class="card-number">
+                    05
+                </span>
+
+            </div>
+
+
+            <h3>
+                Knowledge
+            </h3>
+
+
+            <p>
+
+                Things you learn, questions you ask,
+                books you read and ideas you develop.
+
+            </p>
+
+
+           <div class="sub-items">
+
+    <span onclick="openSubsection('knowledge', 'Books')">
+        Books
+    </span>
+
+    <span onclick="openSubsection('knowledge', 'Notes')">
+        Notes
+    </span>
+
+    <span onclick="openSubsection('knowledge', 'Things I Learned')">
+        Things I Learned
+    </span>
+
+    <span onclick="openSubsection('knowledge', 'Questions')">
+        Questions
+    </span>
+
+    <span onclick="openSubsection('knowledge', 'Ideas')">
+        Ideas
+    </span>
+
+</div>
+
+            <button
+                type="button"
+                onclick="openCategory('knowledge')">
+
+                Open Knowledge
+
+                <span>
+                    →
+                </span>
+
+            </button>
+
+        </article>
+
+
+        <!-- =================================================
+             JOURNEY
+        ================================================== -->
+
+        <article class="content-card journey-card">
+
+            <div class="card-top">
+
+                <div class="card-icon">
+                    🏆
+                </div>
+
+                <span class="card-number">
+                    06
+                </span>
+
+            </div>
+
+
+            <h3>
+                Journey
+            </h3>
+
+
+            <p>
+
+                The milestones, opportunities and
+                experiences that shape your journey.
+
+            </p>
+
+<div class="sub-items">
+
+    <span onclick="openSubsection('journey', 'Certifications')">
+        Certifications
+    </span>
+
+    <span onclick="openSubsection('journey', 'Internships')">
+        Internships
+    </span>
+
+    <span onclick="openSubsection('journey', 'Competitions')">
+        Competitions
+    </span>
+
+    <span onclick="openSubsection('journey', 'Events')">
+        Events
+    </span>
+
+    <span onclick="openSubsection('journey', 'Achievements')">
+        Achievements
+    </span>
+
+</div>
+
+
+            <button
+                type="button"
+                onclick="openCategory('journey')">
+
+                Open Journey
+
+                <span>
+                    →
+                </span>
+
+            </button>
+
+        </article>
+
+
+        <!-- =================================================
+             MEDIA
+        ================================================== -->
+
+        <article class="content-card media-card">
+
+            <div class="card-top">
+
+                <div class="card-icon">
+                    🎥
+                </div>
+
+                <span class="card-number">
+                    07
+                </span>
+
+            </div>
+
+
+            <h3>
+                Media
+            </h3>
+
+
+            <p>
+
+                Videos, photographs, presentations
+                and other visual memories.
+
+            </p>
+
+
+            <div class="sub-items">
+
+    <span onclick="openSubsection('media', 'Videos')">
+        Videos
+    </span>
+
+    <span onclick="openSubsection('media', 'Photographs')">
+        Photographs
+    </span>
+
+    <span onclick="openSubsection('media', 'Presentations')">
+        Presentations
+    </span>
+
+    <span onclick="openSubsection('media', 'Other Media')">
+        Other Media
+    </span>
+
+</div>
+
+
+            <button
+                type="button"
+                onclick="openCategory('media')">
+
+                Open Media
+
+                <span>
+                    →
+                </span>
+
+            </button>
+
+        </article>
+
+
+        <!-- =================================================
+             IDEAS
+        ================================================== -->
+
+        <article class="content-card ideas-card special-card">
+
+            <div class="card-top">
+
+                <div class="card-icon">
+                    ✦
+                </div>
+
+                <span class="card-number">
+                    08
+                </span>
+
+            </div>
+
+
+            <h3>
+                Ideas & Experiments
+            </h3>
+
+
+            <p>
+
+                The unfinished thoughts, strange ideas,
+                observations and experiments that may
+                become something someday.
+
+            </p>
+
+<div class="sub-items">
+
+    <span onclick="openSubsection('ideas', 'Ideas')">
+        Ideas
+    </span>
+
+    <span onclick="openSubsection('ideas', 'Observations')">
+        Observations
+    </span>
+
+    <span onclick="openSubsection('ideas', 'Experiments')">
+        Experiments
+    </span>
+
+    <span onclick="openSubsection('ideas', 'Questions')">
+        Questions
+    </span>
+
+</div>
+
+
+            <button
+                type="button"
+                onclick="openCategory('ideas')">
+
+                Open Ideas
+
+                <span>
+                    →
+                </span>
+
+            </button>
+
+        </article>
+
+
+    </div>
+
+</section>
+
+<!-- =====================================================
+     COLLECTION FILTER
+===================================================== -->
+
+<section class="filter-section">
+
+    <div class="section-heading">
+
+        <span class="eyebrow">
+            ORGANIZE YOUR SCORPIAN
+        </span>
+
+        <h2>
+            Explore by category.
+        </h2>
+
+    </div>
+
+
+    <div class="category-filters">
+
+        <button
+            type="button"
+            class="filter-button active"
+            data-filter="all">
+
+            All
+
+        </button>
+
+        <button
+            type="button"
+            class="filter-button"
+            data-filter="technical">
+
+            💻 Technical
+
+        </button>
+
+        <button
+            type="button"
+            class="filter-button"
+            data-filter="nontechnical">
+
+            🌱 Non-Technical
+
+        </button>
+
+        <button
+            type="button"
+            class="filter-button"
+            data-filter="creative">
+
+            🎨 Creative
+
+        </button>
+
+        <button
+            type="button"
+            class="filter-button"
+            data-filter="research">
+
+            🔬 Research
+
+        </button>
+
+        <button
+            type="button"
+            class="filter-button"
+            data-filter="knowledge">
+
+            🧠 Knowledge
+
+        </button>
+
+        <button
+            type="button"
+            class="filter-button"
+            data-filter="journey">
+
+            🏆 Journey
+
+        </button>
+
+        <button
+            type="button"
+            class="filter-button"
+            data-filter="media">
+
+            🎥 Media
+
+        </button>
+
+        <button
+            type="button"
+            class="filter-button"
+            data-filter="ideas">
+
+            ✦ Ideas
+
+        </button>
+
+    </div>
+
+
+    <div
+        id="subsectionFilters"
+        class="subsection-filters">
+
+    </div>
+
+</section>
+<!-- =====================================================
+     SCORPIAN SEARCH
+===================================================== -->
+
+<section class="search-section">
+
+    <div class="search-box">
+
+        <span class="search-icon">
+            🔎
+        </span>
+
+        <input
+            type="text"
+            id="scorpianSearch"
+            placeholder="Search your Scorpian..."
+            autocomplete="off">
+
+        <button
+            type="button"
+            id="clearSearch">
+
+            ×
+
+        </button>
+
+    </div>
+
+    <p
+        id="searchResultCount"
+        class="search-result-count">
+    </p>
+
+</section>
+<!-- =====================================================
+     YOUR COLLECTION
+===================================================== -->
+
+<section class="collection-section">
+
+
+    <div class="section-heading">
+
+        <span class="eyebrow">
+            YOUR COLLECTION
+        </span>
+
+
+        <h2>
+            What you've created.
+        </h2>
+
+
+        <p>
+            Everything you add to your Scorpian will appear here.
+        </p>
+
+    </div>
+
+
+    {% if content %}
+     <div class="collection-view-toggle">
+
+    <button
+        type="button"
+        class="view-button active"
+        onclick="showCollectionView('grid')">
+
+        ▦ Grid
+
+    </button>
+
+    <button
+        type="button"
+        class="view-button"
+        onclick="showCollectionView('timeline')">
+
+        ◷ Timeline
+
+    </button>
+
+</div>
+<div
+    id="collectionTimeline"
+    class="collection-timeline"
+    style="display:none;">
+
+    {% for item in content %}
+
+        <article class="timeline-item">
+
+            <div class="timeline-marker">
+                ●
+            </div>
+
+            <div class="timeline-content">
+
+                <span class="timeline-date">
+                    {{ item["created_at"][:10] }}
+                </span>
+
+                <span class="timeline-category">
+                    {{ item["category"] }}
+                </span>
+
+                <h3>
+                    {{ item["title"] }}
+                </h3>
+
+                <span class="timeline-subsection">
+                    {{ item["subsection"] }}
+                </span>
+
+                {% if item["description"] %}
+
+                    <p>
+                        {{ item["description"] }}
+                    </p>
+
+                {% endif %}
+
+            </div>
+
+        </article>
+
+    {% endfor %}
+
+</div>
+
+        <div class="collection-grid">
+
+
+            {% for item in content %}
+
+<article
+    class="collection-card"
+    data-search="
+        {{ item['title'] }}
+        {{ item['description'] or '' }}
+        {{ item['category'] }}
+        {{ item['subsection'] }}
+        {{ item['language'] or '' }}
+    "
+    data-category="{{ item['category']|lower }}"
+    data-date="{{ item['created_at'] }}"
+    data-title="{{ item['title']|lower }}"
+    data-subsection="{{ item['subsection']|lower }}"
+>
+
+
+                    <div class="collection-card-top">
+
+                        <span class="collection-category">
+                            {{ item["category"] }}
+                        </span>
+
+
+                        <span class="collection-date">
+
+                            {{ item["created_at"][:10] }}
+
+                        </span>
+
+                    </div>
+
+
+                    <h3>
+                        {{ item["title"] }}
+                    </h3>
+
+
+                    <span class="collection-subsection">
+
+                        {{ item["subsection"] }}
+
+                    </span>
+
+
+                    {% if item["description"] %}
+
+                        <p>
+                            {{ item["description"] }}
+                        </p>
+
+                    {% endif %}
+
+
+                    {% if item["language"] %}
+
+                        <span class="collection-language">
+
+                            {{ item["language"] }}
+
+                        </span>
+
+                    {% endif %}
+
+
+                    {% if item["media_filename"] %}
+
+                        <p>
+
+                            <a
+                                href="{{ url_for(
+                                    'static',
+                                    filename='uploads/' + item['media_filename']
+                                ) }}"
+                                target="_blank">
+
+                                View Attached Media
+
+                            </a>
+
+                        </p>
+
+                    {% endif %}
+
+
+                   <div class="collection-actions">
+
+    <a
+        href="{{ url_for(
+            'edit_content',
+            content_id=item['id']
+        ) }}"
+        class="edit-button">
+
+        Edit
+
+    </a>
+
+
+    <form
+        method="POST"
+        action="{{ url_for(
+            'delete_content',
+            content_id=item['id']
+        ) }}"
+        class="delete-form">
+
+        <button
+            type="submit"
+            class="delete-button"
+            onclick="
+                return confirm(
+                    'Are you sure you want to delete this item?'
+                );
+            ">
+
+            Delete
+
+        </button>
+
+    </form>
+
+</div>
+
+                </article>
+
+
+            {% endfor %}
+
+
+        </div>
+        <div
+    id="noSearchResults"
+    class="no-search-results"
+    style="display:none;">
+
+    <div class="empty-icon">
+        🔎
+    </div>
+
+    <h3>
+        Nothing found.
+    </h3>
+
+    <p>
+        Try searching for another title,
+        category or keyword.
+    </p>
+
+</div>
+
+
+    {% else %}
+
+
+       <div class="empty-collection">
+
+    <div class="empty-icon">
+        🦂
+    </div>
+
+    <span class="eyebrow">
+        NOTHING HERE YET
+    </span>
+
+    <h3>
+        Your Scorpian is waiting.
+    </h3>
+
+    <p>
+        Your collection begins with the first
+        thing you choose to preserve.
+    </p>
+
+    <button
+        type="button"
+        onclick="window.scrollTo({
+            top: document.querySelector('.content-section').offsetTop,
+            behavior: 'smooth'
+        })">
+
+        Add Your First Creation →
+
+    </button>
+
+</div>
+
+
+    {% endif %}
+
+
+</section>
+<!-- =====================================================
+     SCORPIAN TIMELINE
+===================================================== -->
+
+<section class="timeline-section">
+
+    <div class="section-heading">
+
+        <span class="eyebrow">
+            YOUR JOURNEY
+        </span>
+
+        <h2>
+            The story of your Scorpian.
+        </h2>
+
+        <p>
+            A timeline of everything you have
+            added to your personal archive.
+        </p>
+
+    </div>
+
+
+    {% if content %}
+
+        <div class="scorpian-timeline">
+
+
+            {% for item in content %}
+
+                <article
+                    class="timeline-item"
+                    data-category="{{ item['category'] }}"
+                    data-subsection="{{ item['subsection'] }}"
+                    data-title="{{ item['title'] }}"
+                    data-description="{{ item['description'] or '' }}"
+                    data-language="{{ item['language'] or '' }}">
+
+
+                    <!-- DATE -->
+
+                    <div class="timeline-date">
+
+                        <span class="timeline-day">
+
+                            {{ item["created_at"][:10] }}
+
+                        </span>
+
+                    </div>
+
+
+                    <!-- DOT -->
+
+                    <div class="timeline-line">
+
+                        <span class="timeline-dot">
+                        </span>
+
+                    </div>
+
+
+                    <!-- CONTENT -->
+
+                    <div class="timeline-card">
+
+
+                        <div class="timeline-card-top">
+
+                            <span class="timeline-category">
+
+                                {{ item["category"] }}
+
+                            </span>
+
+
+                            <span class="timeline-subsection">
+
+                                {{ item["subsection"] }}
+
+                            </span>
+
+                        </div>
+
+
+                        <h3>
+
+                            <a
+                                href="{{ url_for(
+                                    'view_scorpian_item',
+                                    content_id=item['id']
+                                ) }}"
+                                class="timeline-title">
+
+                                {{ item["title"] }}
+
+                            </a>
+
+                        </h3>
+
+
+                        {% if item["description"] %}
+
+                            <p>
+
+                                {{ item["description"] }}
+
+                            </p>
+
+                        {% endif %}
+
+
+                        {% if item["language"] %}
+
+                            <span class="timeline-language">
+
+                                {{ item["language"] }}
+
+                            </span>
+
+                        {% endif %}
+
+
+                        <div class="timeline-actions">
+
+                            <a
+                                href="{{ url_for(
+                                    'view_scorpian_item',
+                                    content_id=item['id']
+                                ) }}">
+
+                                View Entry →
+
+                            </a>
+
+                        </div>
+
+
+                    </div>
+
+
+                </article>
+
+            {% endfor %}
+
+
+        </div>
+
+
+    {% else %}
+
+        <div class="empty-collection">
+
+            <div class="empty-icon">
+                🦂
+            </div>
+
+            <h3>
+                Your timeline is waiting.
+            </h3>
+
+            <p>
+                Add your first creation to begin
+                building your journey.
+            </p>
+
+        </div>
+
+    {% endif %}
+
+</section>
+
+<!-- =====================================================
+     RUN SCORPIAN
+===================================================== -->
+
+<section class="run-section">
+
+
+    <div class="run-content">
+
+
+        <span class="eyebrow">
+            WHEN YOU ARE READY
+        </span>
+
+
+        <h2>
+            Let your Scorpian come alive.
+        </h2>
+
+
+        <p>
+
+            Build your collection first.
+            Then generate the identity that
+            represents you.
+
+        </p>
+
+
+        <button
+            class="run-point"
+            type="button"
+            onclick="runScorpian()">
+
+
+            <span class="run-circle">
+                🦂
+            </span>
+
+
+            <span class="run-label">
+                RUN SCORPIAN
+            </span>
+
+
+        </button>
+
+
+    </div>
+
+
+</section>
+
+
+</main>
+
+
+<!-- =====================================================
+     ADD CONTENT PANEL
+===================================================== -->
+
+<div
+    id="contentPanel"
+    class="content-panel">
+
+
+    <div class="panel-box">
+
+
+        <button
+            class="close-button"
+            type="button"
+            onclick="closeCategory()">
+
+            ×
+
+        </button>
+
+
+        <span class="eyebrow">
+            ADD TO YOUR SCORPIAN
+        </span>
+
+
+        <h2 id="panelTitle">
+            Add Content
+        </h2>
+
+
+        <p id="panelDescription">
+            Add something to your Scorpian.
+        </p>
+
+
+        <form
+            method="POST"
+            action="{{ url_for('save_content') }}"
+            enctype="multipart/form-data">
+
+
+            <input
+                type="hidden"
+                name="category"
+                id="selectedCategory">
+
+
+            <label>
+                Title
+            </label>
+
+
+            <input
+                type="text"
+                name="title"
+                id="contentTitle"
+                placeholder="Give it a title"
+                required>
+
+
+            <label>
+                Description
+            </label>
+
+
+            <textarea
+                name="description"
+                id="description"
+                placeholder="Tell us about it..."
+                required></textarea>
+
+
+            <label>
+                Sub-section
+            </label>
+
+
+            <select
+                id="categorySelect"
+                name="subsection"
+                required>
+
+                <option value="">
+                    Select a section
+                </option>
+
+            </select>
+
+
+            <label>
+                Language
+            </label>
+
+
+            <select name="language">
+
+                <option value="English">
+                    English
+                </option>
+
+                <option value="Kannada">
+                    Kannada
+                </option>
+
+                <option value="Hindi">
+                    Hindi
+                </option>
+
+                <option value="Telugu">
+                    Telugu
+                </option>
+
+                <option value="Other">
+                    Other
+                </option>
+
+            </select>
+
+
+            <label>
+                Add Media
+            </label>
+
+
+            <input
+                type="file"
+                name="media"
+                accept="
+                    image/*,
+                    video/*,
+                    .pdf,
+                    .ppt,
+                    .pptx,
+                    .doc,
+                    .docx
+                ">
+
+
+            <button
+                type="submit"
+                class="save-button">
+
+                Save to Scorpian
+
+            </button>
+
+
+        </form>
+
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/script.js'
+    ) }}"
+    defer>
+</script>
+
+
+</body>
+
+</html>

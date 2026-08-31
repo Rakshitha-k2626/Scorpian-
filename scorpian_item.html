@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {{ item["title"] }} — Scorpian
+    </title>
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/style.css'
+          ) }}">
+
+</head>
+
+
+<body>
+
+
+<div class="background-glow glow-one"></div>
+<div class="background-glow glow-two"></div>
+
+
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
+
+<nav class="navbar">
+
+    <div class="logo">
+
+        <span class="logo-symbol">
+            🦂
+        </span>
+
+        <span>
+            SCORPIAN
+        </span>
+
+    </div>
+
+
+    <div class="dashboard-nav">
+
+        <a href="/public">
+            My Scorpian
+        </a>
+
+        <a href="/dashboard">
+            Dashboard
+        </a>
+
+        <a href="/logout">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =====================================================
+     ITEM PAGE
+===================================================== -->
+
+<main class="item-page">
+
+
+    <!-- BACK -->
+
+    <a
+        href="/public"
+        class="back-link">
+
+        ← Back to My Scorpian
+
+    </a>
+
+
+
+    <!-- CATEGORY -->
+
+    <span class="eyebrow">
+
+        {{ item["category"] }}
+
+    </span>
+
+
+
+    <!-- TITLE -->
+
+    <h1>
+
+        {{ item["title"] }}
+
+    </h1>
+
+
+
+    <!-- SUBSECTION -->
+
+    <span class="item-page-subsection">
+
+        {{ item["subsection"] }}
+
+    </span>
+
+
+
+    <!-- DESCRIPTION -->
+
+    {% if item["description"] %}
+
+        <section class="item-description">
+
+            <p>
+
+                {{ item["description"] }}
+
+            </p>
+
+        </section>
+
+    {% endif %}
+
+
+
+    <!-- DETAILS -->
+
+    <section class="item-details">
+
+
+        <div class="detail-box">
+
+            <span>
+                CATEGORY
+            </span>
+
+            <strong>
+                {{ item["category"] }}
+            </strong>
+
+        </div>
+
+
+        <div class="detail-box">
+
+            <span>
+                SUBSECTION
+            </span>
+
+            <strong>
+                {{ item["subsection"] }}
+            </strong>
+
+        </div>
+
+
+        <div class="detail-box">
+
+            <span>
+                LANGUAGE
+            </span>
+
+            <strong>
+                {{ item["language"] or "Not specified" }}
+            </strong>
+
+        </div>
+
+
+        <div class="detail-box">
+
+            <span>
+                ADDED
+            </span>
+
+            <strong>
+                {{ item["created_at"] }}
+            </strong>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- MEDIA -->
+
+    {% if item["media_filename"] %}
+
+
+        <section class="item-media-section">
+
+
+            <span class="eyebrow">
+
+                ATTACHED MEDIA
+
+            </span>
+
+
+            <h2>
+
+                Supporting material
+
+            </h2>
+
+
+            <p>
+
+                A file has been attached
+                to this Scorpian entry.
+
+            </p>
+
+
+            <a
+                href="{{ url_for(
+                    'static',
+                    filename='uploads/' +
+                    item['media_filename']
+                ) }}"
+                target="_blank"
+                class="media-button">
+
+                Open Attached File →
+
+            </a>
+
+
+        </section>
+
+
+    {% endif %}
+
+
+
+    <!-- ACTIONS -->
+
+    <section class="item-actions">
+
+
+        <a
+            href="{{ url_for(
+                'edit_content',
+                content_id=item['id']
+            ) }}">
+
+            Edit
+
+        </a>
+
+
+        <form
+            method="POST"
+            action="{{ url_for(
+                'delete_content',
+                content_id=item['id']
+            ) }}">
+
+
+            <button
+                type="submit"
+                onclick="
+                    return confirm(
+                        'Are you sure you want to delete this item?'
+                    );
+                ">
+
+                Delete
+
+            </button>
+
+
+        </form>
+
+
+    </section>
+
+
+</main>
+
+
+</body>
+
+</html>
